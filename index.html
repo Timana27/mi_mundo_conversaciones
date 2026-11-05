@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#7c6cf2">
+  <title>Mi mundo de conversaciones</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div class="brand"><span class="brand-icon">💬</span> Mi mundo de conversaciones</div>
+      <div class="score-pill" aria-live="polite">⭐ <span id="stars">0</span> estrellas</div>
+    </header>
+
+    <section id="welcome" class="screen welcome-screen">
+      <div class="welcome-art" aria-hidden="true">
+        <span class="cloud cloud-one">☁️</span>
+        <span class="cloud cloud-two">☁️</span>
+        <span class="rainbow">🌈</span>
+        <span class="friend friend-one">🧒</span>
+        <span class="friend friend-two">👧</span>
+        <span class="sparkle sparkle-one">✨</span>
+        <span class="sparkle sparkle-two">⭐</span>
+      </div>
+      <p class="eyebrow">¡Aprendemos jugando!</p>
+      <h1>¡Hola, pequeño<br><span>conversador!</span></h1>
+      <p class="intro">Vamos a aprender a saludar, preguntar, escuchar y compartir lo que sentimos.</p>
+      <label class="name-label" for="playerName">¿Cómo te llamas?</label>
+      <input id="playerName" class="name-input" maxlength="18" placeholder="Escribe tu nombre (opcional)" autocomplete="given-name">
+      <button id="startBtn" class="primary-btn">¡Vamos a jugar! <span>🚀</span></button>
+      <p class="tiny-note">Un juego para aprender a conversar con alegría.</p>
+    </section>
+
+    <section id="game" class="screen game-screen hidden">
+      <div class="game-heading">
+        <button id="homeBtn" class="icon-btn" aria-label="Volver al inicio" title="Inicio">🏠</button>
+        <div class="progress-wrap">
+          <div class="progress-label"><span id="levelLabel">Nivel 1 de 5</span><span id="progressText">0%</span></div>
+          <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+        </div>
+        <button id="soundBtn" class="icon-btn" aria-label="Leer pregunta en voz alta" title="Leer en voz alta">🔊</button>
+      </div>
+
+      <div class="level-card">
+        <div class="level-emoji" id="levelEmoji">👋</div>
+        <div>
+          <p class="eyebrow" id="levelTag">MISIÓN 1</p>
+          <h2 id="levelTitle">Aprendemos a saludar</h2>
+        </div>
+      </div>
+
+      <div class="scene-card">
+        <div class="scene-illustration" id="sceneIllustration" aria-hidden="true">🧒 👧</div>
+        <p id="sceneText" class="scene-text">Llegas al salón y encuentras a tu compañero.</p>
+        <p class="question" id="questionText">¿Qué puedes decirle?</p>
+      </div>
+
+      <div class="answers" id="answers" aria-label="Elige una respuesta"></div>
+      <div id="feedback" class="feedback hidden" role="status" aria-live="polite"></div>
+      <div class="game-actions">
+        <button id="nextBtn" class="primary-btn hidden">Continuar <span>➡️</span></button>
+      </div>
+      <p class="helper">💡 ¡Piensa, elige y aprende! Puedes pedirle ayuda a tu docente.</p>
+    </section>
+
+    <section id="finish" class="screen finish-screen hidden">
+      <div class="trophy">🏆</div>
+      <p class="eyebrow">¡MISIÓN CUMPLIDA!</p>
+      <h1>¡Lo lograste<span>!</span></h1>
+      <p id="finishMessage" class="intro">Has completado todas las misiones.</p>
+      <div class="final-score"><span>⭐</span><strong id="finalStars">0</strong><small>estrellas conseguidas</small></div>
+      <div class="certificate">
+        <div class="certificate-stars">🌟 🌈 🌟</div>
+        <h2>Diploma de pequeño conversador</h2>
+        <p>Se entrega a</p>
+        <strong id="certificateName">¡Un gran conversador!</strong>
+        <p>Por aprender a escuchar, preguntar, responder y compartir con respeto.</p>
+        <div class="certificate-bottom">¡Sigue conversando y aprendiendo! 💛</div>
+      </div>
+      <button id="replayBtn" class="primary-btn">Jugar otra vez <span>🎮</span></button>
+    </section>
+
+    <footer>Hecho para aprender, compartir y conversar 💛</footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
