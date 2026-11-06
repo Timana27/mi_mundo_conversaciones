@@ -1,208 +1,389 @@
+
 const levels = [
   {
-    emoji: "👋", 
-    title: "Aprendemos a saludar", 
-    scene: "Llegas al salón y encuentras a tu compañero.", 
-    image: "https://img.freepik.com/vector-gratis/ninos-pequeños-saludandose-escuela_29937-4856.jpg",
-    question: "¿Qué puedes decirle?",
-    answers: ["¡Hola! ¿Cómo estás?", "No quiero hablar contigo.", "Me voy sin saludar."],
-    correct: 0, 
-    explanation: "¡Muy bien! Saludar con amabilidad es una buena forma de comenzar una conversación."
+    title: "Aprendemos a saludar",
+    scene: "Llegas al salón y encuentras a tu compañero.",
+    question: "¿Qué puedes decirle para comenzar una conversación?",
+    answers: [
+      "¡Hola! ¿Cómo estás?",
+      "No quiero hablar contigo.",
+      "¡Adiós!"
+    ],
+    correct: 0,
+    success: "¡Muy bien! Saludar es una bonita manera de comenzar una conversación.",
+    image: "imagenes/mision-1-saludar.png",
+    alt: "Dos niños saludándose"
   },
   {
-    emoji: "❓", 
-    title: "Aprendemos a preguntar", 
-    scene: "Tu amiga tiene un juguete nuevo y quieres conocerlo.", 
-    image: "https://img.freepik.com/vector-gratis/ninos-jugando-juguetes-juntos_29937-5120.jpg",
-    question: "¿Qué podrías preguntarle?",
-    answers: ["¡Dámelo ahora!", "¿Cómo se llama tu juguete?", "No me interesa."],
-    correct: 1, 
-    explanation: "¡Excelente! Hacer preguntas nos ayuda a conocer mejor a otras personas."
+    title: "Aprendemos a preguntar",
+    scene: "Tu compañero tiene un juguete muy bonito y quieres conocerlo.",
+    question: "¿Qué puedes preguntarle?",
+    answers: [
+      "Dame tu juguete.",
+      "¿Cómo se llama tu juguete?",
+      "No me interesa."
+    ],
+    correct: 1,
+    success: "¡Excelente! Hacer preguntas nos ayuda a conocer a los demás.",
+    image: "imagenes/mision-2-preguntar.png",
+    alt: "Un niño preguntando a su compañero por un juguete"
   },
   {
-    emoji: "😊", 
-    title: "Expresamos emociones", 
-    scene: "Estás feliz porque jugaste con tus amigos.", 
-    image: "https://img.freepik.com/vector-gratis/ninos-felices-jugando-pelota-parque_29937-5200.jpg",
-    question: "¿Cómo puedes contarles cómo te sientes?",
-    answers: ["Estoy feliz porque jugué con mis amigos.", "No voy a decir nada.", "Todos deben estar tristes."],
-    correct: 0, 
-    explanation: "¡Genial! Podemos compartir nuestros sentimientos usando palabras."
+    title: "Expresamos emociones",
+    scene: "Hoy jugaste con tus amigos y te sientes muy feliz.",
+    question: "¿Cómo puedes expresar lo que sientes?",
+    answers: [
+      "Estoy feliz porque jugué con mis amigos.",
+      "No quiero contar nada.",
+      "No sé y no me importa."
+    ],
+    correct: 0,
+    success: "¡Genial! Expresar nuestras emociones es importante.",
+    image: "imagenes/mision-3-emociones.png",
+    alt: "Un niño expresando felicidad"
   },
   {
-    emoji: "👂", 
-    title: "Aprendemos a escuchar", 
-    scene: "Tu compañero te está contando algo que le pasó.", 
-    image: "https://img.freepik.com/vector-gratis/nino-explicando-algo-su-amiga_29937-4980.jpg",
-    question: "¿Qué debes hacer mientras habla?",
-    answers: ["Interrumpirlo todo el tiempo.", "Escucharlo y esperar mi turno.", "Ignorarlo y jugar."],
-    correct: 1, 
-    explanation: "¡Así se hace! Escuchar con atención y esperar nuestro turno demuestra respeto."
+    title: "Aprendemos a escuchar",
+    scene: "Tu amiga quiere contarte algo que le sucedió.",
+    question: "¿Qué debes hacer cuando alguien está hablando?",
+    answers: [
+      "Interrumpirla para hablar primero.",
+      "Escucharla y esperar mi turno.",
+      "Irme sin escuchar."
+    ],
+    correct: 1,
+    success: "¡Muy bien! Escuchar demuestra respeto y cariño.",
+    image: "imagenes/mision-4-escuchar.png",
+    alt: "Una niña escuchando a su compañero"
   },
   {
-    emoji: "🤝", 
-    title: "Conversamos con respeto", 
-    scene: "No puedes abrir tu lonchera y necesitas ayuda.", 
-    image: "https://img.freepik.com/vector-gratis/nina-pidiendo-ayuda-su-profesora_29937-5310.jpg",
-    question: "¿Qué puedes decirle a tu profesora?",
-    answers: ["¡Ayúdame, por favor!", "¡Hazlo ahora!", "Gritar y enojarme."],
-    correct: 0, 
-    explanation: "¡Muy bien! Pedir ayuda con respeto hace que podamos entendernos mejor."
+    title: "Conversamos con respeto",
+    scene: "Necesitas ayuda de un compañero para recoger los juguetes.",
+    question: "¿Cómo puedes pedirle ayuda?",
+    answers: [
+      "¡Ayúdame, por favor!",
+      "¡Hazlo ahora!",
+      "¡Dámelo!"
+    ],
+    correct: 0,
+    success: "¡Fantástico! Las palabras amables nos ayudan a convivir mejor.",
+    image: "imagenes/mision-5-respeto.png",
+    alt: "Dos niños ayudándose"
   }
 ];
 
-const $ = (id) => document.getElementById(id);
-const welcome = $("welcome");
-const game = $("game");
-const finish = $("finish");
 let currentLevel = 0;
-let stars = 0;
-let player = "Ana";
+let totalStars = 0;
+let player = "Pequeño conversador";
 let answered = false;
 
-function showScreen(screen) {
-  [welcome, game, finish].forEach(s => s.classList.add("hidden"));
-  screen.classList.remove("hidden");
+const welcome = document.getElementById("welcome");
+const game = document.getElementById("game");
+const finish = document.getElementById("finish");
+
+const playerName = document.getElementById("playerName");
+const startBtn = document.getElementById("startBtn");
+const homeBtn = document.getElementById("homeBtn");
+
+const stars = document.getElementById("stars");
+const levelLabel = document.getElementById("levelLabel");
+const progressText = document.getElementById("progressText");
+const progressBar = document.getElementById("progressBar");
+
+const levelTitle = document.getElementById("levelTitle");
+const missionImage = document.getElementById("missionImage");
+const sceneText = document.getElementById("sceneText");
+
+const sceneSoundBtn = document.getElementById("sceneSoundBtn");
+const questionSoundBtn = document.getElementById("questionSoundBtn");
+const questionText = document.getElementById("questionText");
+const answers = document.getElementById("answers");
+
+const feedback = document.getElementById("feedback");
+const nextBtn = document.getElementById("nextBtn");
+const soundBtn = document.getElementById("soundBtn");
+
+const finishMessage = document.getElementById("finishMessage");
+const finalStars = document.getElementById("finalStars");
+const certificateName = document.getElementById("certificateName");
+
+const printBtn = document.getElementById("printBtn");
+const replayBtn = document.getElementById("replayBtn");
+
+const backgroundMusic = document.getElementById("backgroundMusic");
+backgroundMusic.volume = 0.15;
+
+// VOZ MANUAL
+function speak(text) {
+  if (!("speechSynthesis" in window)) return;
+
+  window.speechSynthesis.cancel();
+
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = "es-PE";
+  utterance.rate = 0.88;
+  utterance.pitch = 1.12;
+  utterance.volume = 1;
+
+  const voices = window.speechSynthesis.getVoices();
+
+  const spanishVoice = voices.find(voice =>
+    voice.lang.toLowerCase().includes("es-pe")
+  ) || voices.find(voice =>
+    voice.lang.toLowerCase().includes("es")
+  );
+
+  if (spanishVoice) {
+    utterance.voice = spanishVoice;
+  }
+
+  window.speechSynthesis.speak(utterance);
 }
 
+// MÚSICA DE FONDO
+function startMusic() {
+  if (backgroundMusic.paused) {
+    backgroundMusic.play().catch(error => {
+      console.log("No se pudo reproducir la música:", error);
+    });
+  }
+}
+
+backgroundMusic.addEventListener("error", () => {
+  console.log("No se encontró el archivo de música.");
+});
+
+// INICIAR JUEGO
 function startGame() {
-  player = $("playerName").value.trim() || "Ana";
+  player = playerName.value.trim() || "Pequeño conversador";
+
   currentLevel = 0;
-  stars = 0;
-  $("stars").textContent = stars;
-  showScreen(game);
+  totalStars = 0;
+
+  startMusic();
+
+  welcome.classList.add("hidden");
+  finish.classList.add("hidden");
+  game.classList.remove("hidden");
+
   renderLevel();
+
+  speak(
+    "¡Hola " + player +
+    "! Bienvenido a Mi mundo de conversaciones. ¡Vamos a aprender!"
+  );
 }
 
+// MOSTRAR MISIÓN
 function renderLevel() {
   const level = levels[currentLevel];
-  answered = false;
-  $("levelLabel").textContent = `Nivel ${currentLevel + 1} de ${levels.length}`;
-  const progressPercent = Math.round((currentLevel / levels.length) * 100);
-  $("progressText").textContent = `${progressPercent}%`;
-  $("progressBar").style.width = `${progressPercent}%`;
-  
-  $("levelEmoji").textContent = level.emoji;
-  $("levelTitle").textContent = level.title;
-  $("sceneImg").src = level.image;
-  $("sceneText").textContent = level.scene;
-  $("questionText").textContent = level.question;
-  
-  $("feedback").className = "feedback hidden";
-  $("feedback").textContent = "";
-  $("nextBtn").classList.add("hidden");
 
-  const answers = $("answers");
+  answered = false;
+
+  levelTitle.textContent = level.title;
+  sceneText.textContent = level.scene;
+  questionText.textContent = level.question;
+
+  missionImage.src = level.image;
+  missionImage.alt = level.alt;
+
+  missionImage.onerror = () => {
+    missionImage.alt = "Imagen de la misión no encontrada";
+    console.log("No se encontró la imagen:", level.image);
+  };
+
+  levelLabel.textContent =
+    `Misión ${currentLevel + 1} de ${levels.length}`;
+
+  const progress = ((currentLevel + 1) / levels.length) * 100;
+
+  progressText.textContent = Math.round(progress) + "%";
+  progressBar.style.width = progress + "%";
+
+  stars.textContent = totalStars;
+
+  feedback.classList.add("hidden");
+  nextBtn.classList.add("hidden");
+
+  renderAnswers();
+}
+
+// CREAR RESPUESTAS CON BOCINAS SEPARADAS
+function renderAnswers() {
+  const level = levels[currentLevel];
+
   answers.innerHTML = "";
+
   level.answers.forEach((answer, index) => {
-    // Contenedor de la fila para separar el botón de respuesta y la bocina
+
     const row = document.createElement("div");
     row.className = "answer-row";
 
-    const button = document.createElement("button");
-    button.className = "answer-btn";
-    button.type = "button";
-    button.innerHTML = `
-      <span class="answer-letter">${String.fromCharCode(65 + index)}</span>
-      <span class="answer-text">${answer}</span>
-    `;
-    
-    button.addEventListener("click", () => {
-      chooseAnswer(index);
+    // BOCINA INDEPENDIENTE
+    const speakButton = document.createElement("button");
+    speakButton.className = "answer-speak";
+    speakButton.type = "button";
+    speakButton.textContent = "🔊";
+    speakButton.setAttribute("aria-label", "Escuchar respuesta");
+
+    speakButton.addEventListener("click", () => {
+      speak(answer);
     });
 
-    // Botón de bocina externo ubicado afuera al lado derecho
-    const speakerBtn = document.createElement("button");
-    speakerBtn.className = "external-speaker-btn";
-    speakerBtn.type = "button";
-    speakerBtn.title = "Escuchar opción";
-    speakerBtn.innerHTML = "🔊";
-    speakerBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      speakText(answer);
+    // BOTÓN DE RESPUESTA
+    const answerButton = document.createElement("button");
+    answerButton.className = "answer-btn";
+    answerButton.type = "button";
+    answerButton.textContent = answer;
+
+    answerButton.addEventListener("click", () => {
+      checkAnswer(index, answerButton);
     });
 
-    row.appendChild(button);
-    row.appendChild(speakerBtn);
+    row.appendChild(speakButton);
+    row.appendChild(answerButton);
+
     answers.appendChild(row);
   });
 }
 
-function chooseAnswer(index) {
+// COMPROBAR RESPUESTA
+function checkAnswer(index, selectedButton) {
   if (answered) return;
-  answered = true;
-  const level = levels[currentLevel];
-  
-  const rows = [...$("answers").querySelectorAll(".answer-row")];
-  rows.forEach((row, i) => {
-    const btn = row.querySelector(".answer-btn");
-    btn.disabled = true;
-    if (i === level.correct) btn.classList.add("correct");
-    else if (i === index) btn.classList.add("wrong");
-  });
 
-  const isCorrect = index === level.correct;
-  if (isCorrect) {
-    stars += 1;
-    $("stars").textContent = stars;
+  const level = levels[currentLevel];
+
+  if (index === level.correct) {
+
+    answered = true;
+    totalStars++;
+
+    stars.textContent = totalStars;
+
+    selectedButton.classList.add("correct");
+
+    feedback.textContent = level.success;
+    feedback.classList.remove("hidden");
+
+    const buttons = answers.querySelectorAll(".answer-btn");
+
+    buttons.forEach(button => {
+      button.disabled = true;
+    });
+
+    const speakers = answers.querySelectorAll(".answer-speak");
+
+    speakers.forEach(button => {
+      button.disabled = true;
+    });
+
+    nextBtn.classList.remove("hidden");
+
+    nextBtn.textContent =
+      currentLevel === levels.length - 1
+        ? "Ver mi diploma"
+        : "Continuar";
+
+    speak(level.success);
+
+  } else {
+
+    selectedButton.classList.add("incorrect");
+
+    feedback.textContent = "¡Inténtalo otra vez! Tú puedes.";
+    feedback.classList.remove("hidden");
+
+    speak("¡Inténtalo otra vez! Tú puedes.");
+
+    setTimeout(() => {
+      selectedButton.classList.remove("incorrect");
+    }, 1000);
   }
-  const feedback = $("feedback");
-  feedback.className = `feedback ${isCorrect ? "good" : ""}`;
-  feedback.textContent = `${isCorrect ? "🌟 ¡Respuesta correcta! " : "💛 ¡Buen intento! "} ${level.explanation}`;
-  $("nextBtn").textContent = currentLevel === levels.length - 1 ? "Ver mi diploma 🏆" : "Siguiente misión ➡️";
-  $("nextBtn").classList.remove("hidden");
 }
 
-function nextLevel() {
-  if (!answered) return;
+// ESCUCHAR SITUACIÓN
+sceneSoundBtn.addEventListener("click", () => {
+  speak(levels[currentLevel].scene);
+});
+
+// ESCUCHAR PREGUNTA
+questionSoundBtn.addEventListener("click", () => {
+  speak(levels[currentLevel].question);
+});
+
+// ESCUCHAR SITUACIÓN Y PREGUNTA
+soundBtn.addEventListener("click", () => {
+  const level = levels[currentLevel];
+
+  speak(level.scene + " " + level.question);
+});
+
+// SIGUIENTE MISIÓN
+nextBtn.addEventListener("click", () => {
   if (currentLevel < levels.length - 1) {
-    currentLevel += 1;
+
+    currentLevel++;
+
     renderLevel();
+
+    speak(levels[currentLevel].title);
+
   } else {
     showFinish();
   }
-}
+});
 
+// MOSTRAR DIPLOMA
 function showFinish() {
-  $("progressText").textContent = "100%";
-  $("progressBar").style.width = "100%";
-  $("stars").textContent = stars;
-  $("finalStars").textContent = stars;
-  $("finishMessage").textContent = `¡${player}, has terminado las cinco misiones! Sigue practicando tus conversaciones cada día.`;
-  $("certificateName").textContent = player;
-  showScreen(finish);
+  game.classList.add("hidden");
+  finish.classList.remove("hidden");
+
+  certificateName.textContent = player;
+  finalStars.textContent = totalStars;
+
+  finishMessage.textContent =
+    "¡Felicitaciones, " + player +
+    "! Has completado las cinco misiones de conversación.";
+
+  speak(
+    "¡Felicitaciones " + player +
+    "! Has terminado todas las misiones. ¡Eres un pequeño conversador!"
+  );
 }
 
-function speakText(text) {
-  if (!("speechSynthesis" in window)) return;
+// VOLVER AL INICIO
+homeBtn.addEventListener("click", () => {
   window.speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = "es-PE";
-  utterance.rate = 0.9;
-  window.speechSynthesis.speak(utterance);
+
+  game.classList.add("hidden");
+  finish.classList.add("hidden");
+  welcome.classList.remove("hidden");
+});
+
+// IMPRIMIR DIPLOMA
+printBtn.addEventListener("click", () => {
+  window.print();
+});
+
+// VOLVER A JUGAR
+replayBtn.addEventListener("click", () => {
+  currentLevel = 0;
+  totalStars = 0;
+
+  finish.classList.add("hidden");
+  game.classList.remove("hidden");
+
+  renderLevel();
+
+  speak("¡Vamos a jugar otra vez!");
+});
+
+// CARGAR VOCES DEL NAVEGADOR
+if ("speechSynthesis" in window) {
+  window.speechSynthesis.onvoiceschanged = () => {
+    window.speechSynthesis.getVoices();
+  };
 }
 
-function speakQuestion() {
-  const level = levels[currentLevel];
-  const text = `${level.scene}. ${level.question}`;
-  speakText(text);
-}
-
-// Event Listeners
-$("startBtn").addEventListener("click", startGame);
-$("playerName").addEventListener("keypress", (e) => {
-  if (e.key === "Enter") startGame();
-});
-$("nextBtn").addEventListener("click", nextLevel);
-$("soundBtn").addEventListener("click", speakQuestion);
-$("questionSoundBtn").addEventListener("click", speakQuestion);
-
-$("homeBtn").addEventListener("click", () => {
-  if ("speechSynthesis" in window) window.speechSynthesis.cancel();
-  showScreen(welcome);
-});
-
-$("replayBtn").addEventListener("click", () => {
-  $("playerName").value = player === "" ? "" : player;
-  showScreen(welcome);
-});
+// BOTÓN DE INICIO
+startBtn.addEventListener("click", startGame);
