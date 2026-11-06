@@ -1,107 +1,178 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="theme-color" content="#7c6cf2">
-        <title>Mi mundo de conversaciones</title>
-          <link rel="stylesheet" href="style.css">
-          </head>
-          <body>
-            <main class="app">
-                <!-- BARRA SUPERIOR -->
-                    <header class="topbar">
-                          <button class="icon-btn-top" aria-label="Icono de chat">💬</button>
-                                <div class="brand">Mi mundo de conversaciones</div>
-                                      <div class="score-pill" aria-live="polite">⭐ <span id="stars">0</span> estrellas</div>
-                                          </header>
-                                          
-                                              <!-- PANTALLA DE BIENVENIDA -->
-                                                  <section id="welcome" class="screen welcome-screen">
-                                                        <div class="welcome-art">
-                                                                <!-- Imagen principal de bienvenida (puedes cambiar el link por tu propia imagen) -->
-                                                                        <img src="https://img.freepik.com/vector-gratis/ninos-felices-dibujos-animados-saludando_29937-4325.jpg" alt="Niños saludando" class="welcome-img">
-                                                                              </div>
-                                                                                    <div class="badge-pill">¡Aprendemos jugando!</div>
-                                                                                          <h1>¡Hola, pequeño<br><span>conversador!</span></h1>
-                                                                                                <p class="intro">Vamos a aprender a saludar, preguntar, escuchar y compartir lo que sentimos.</p>
-                                                                                                      
-                                                                                                            <label class="name-label" for="playerName">¿Cómo te llamas?</label>
-                                                                                                                  <input id="playerName" class="name-input" maxlength="18" placeholder="Escribe tu nombre (opcional)" autocomplete="given-name">
-                                                                                                                        
-                                                                                                                              <button id="startBtn" class="primary-btn">¡Vamos a jugar! 🚀</button>
-                                                                                                                                    <p class="tiny-note">Un juego para aprender con alegría. ❤️</p>
-                                                                                                                                        </section>
-                                                                                                                                        
-                                                                                                                                            <!-- PANTALLA DE JUEGO -->
-                                                                                                                                                <section id="game" class="screen game-screen hidden">
-                                                                                                                                                      <div class="game-heading">
-                                                                                                                                                              <button id="homeBtn" class="icon-btn" aria-label="Volver al inicio" title="Inicio">🏠</button>
-                                                                                                                                                                      <div class="progress-wrap">
-                                                                                                                                                                                <div class="progress-label"><span id="levelLabel">Nivel 1 de 5</span><span id="progressText">0%</span></div>
-                                                                                                                                                                                          <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
-                                                                                                                                                                                                  </div>
-                                                                                                                                                                                                          <button id="soundBtn" class="icon-btn speaker-lg" aria-label="Leer pregunta en voz alta" title="Leer en voz alta">🔊</button>
-                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                
-                                                                                                                                                                                                                      <div class="level-card">
-                                                                                                                                                                                                                              <div class="level-emoji" id="levelEmoji">👋</div>
-                                                                                                                                                                                                                                      <div>
-                                                                                                                                                                                                                                                <h2 id="levelTitle">Aprendemos a saludar</h2>
-                                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                                              </div>
-                                                                                                                                                                                                                                                              
-                                                                                                                                                                                                                                                                    <!-- Contenedor de la ilustración de la misión -->
-                                                                                                                                                                                                                                                                          <div class="scene-illustration-box">
-                                                                                                                                                                                                                                                                                  <img id="sceneImg" src="" alt="Ilustración de la misión" class="scene-img">
-                                                                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                                                                              <div class="scene-bubble" id="sceneText">Llegas al salón y encuentras a tu compañero.</div>
-                                                                                                                                                                                                                                                                                              
-                                                                                                                                                                                                                                                                                                    <div class="question-pill">
-                                                                                                                                                                                                                                                                                                            <button class="icon-btn-sm" id="questionSoundBtn" title="Escuchar pregunta">🔊</button>
-                                                                                                                                                                                                                                                                                                                    <p class="question" id="questionText">¿Qué puedes decirle?</p>
-                                                                                                                                                                                                                                                                                                                          </div>
-                                                                                                                                                                                                                                                                                                                          
-                                                                                                                                                                                                                                                                                                                                <div class="answers" id="answers" aria-label="Elige una respuesta"></div>
-                                                                                                                                                                                                                                                                                                                                      
-                                                                                                                                                                                                                                                                                                                                            <div id="feedback" class="feedback hidden" role="status" aria-live="polite"></div>
-                                                                                                                                                                                                                                                                                                                                                  
-                                                                                                                                                                                                                                                                                                                                                        <div class="game-actions">
-                                                                                                                                                                                                                                                                                                                                                                <button id="nextBtn" class="primary-btn hidden">Siguiente misión ➡️</button>
-                                                                                                                                                                                                                                                                                                                                                                      </div>
-                                                                                                                                                                                                                                                                                                                                                                            
-                                                                                                                                                                                                                                                                                                                                                                                  <div class="helper-pill">
-                                                                                                                                                                                                                                                                                                                                                                                          <span>💡</span> <span>¡Piensa, elige y aprende!</span>
-                                                                                                                                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                                                                                                                                    </section>
-                                                                                                                                                                                                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                                                                                                                                                                                        <!-- PANTALLA DE FINALIZACIÓN -->
-                                                                                                                                                                                                                                                                                                                                                                                                            <section id="finish" class="screen finish-screen hidden">
-                                                                                                                                                                                                                                                                                                                                                                                                                  <div class="trophy">🏆</div>
-                                                                                                                                                                                                                                                                                                                                                                                                                        <div class="badge-pill-purple">¡MISIÓN CUMPLIDA!</div>
-                                                                                                                                                                                                                                                                                                                                                                                                                              <h1>¡Lo lograste!</h1>
-                                                                                                                                                                                                                                                                                                                                                                                                                                    <p id="finishMessage" class="intro">Has completado todas las misiones.</p>
-                                                                                                                                                                                                                                                                                                                                                                                                                                          
-                                                                                                                                                                                                                                                                                                                                                                                                                                                <div class="final-score">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        <span>⭐</span><strong id="finalStars">5</strong><small>estrellas conseguidas</small>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                              </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <div class="certificate">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  <div class="certificate-stars">🌟 🌈 🌟</div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <h2>Diploma de pequeño conversador</h2>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  <p>Se entrega a:</p>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <div class="certificate-name-box">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <strong id="certificateName">""</strong>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <p>Por aprender a escuchar, preguntar, responder y compartir con respeto.</p>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <div class="certificate-bottom">¡Sigue conversando y aprendiendo! 💖</div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              <button id="replayBtn" class="primary-btn">Jugar otra vez 🎮</button>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </section>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      <footer>Hecho para aprender, compartir y conversar 💛</footer>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </main>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <script src="script.js"></script>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          </body>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          </html>>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#7c6cf2">
+  <title>Mi mundo de conversaciones</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main class="app">
+
+    <!-- PANTALLA DE INICIO -->
+    <section id="welcome" class="screen welcome-screen">
+      <div class="welcome-card">
+        <div class="welcome-image">
+          <img src="imagenes/personajes.png" alt="Dos niños animados">
+        </div>
+
+        <h1>Mi mundo de conversaciones</h1>
+        <p>¡Aprendamos a conversar, escuchar y compartir!</p>
+
+        <label for="playerName">¿Cómo te llamas?</label>
+        <input id="playerName" type="text" placeholder="Escribe tu nombre">
+
+        <button id="startBtn" class="primary-btn">
+          ¡Vamos a jugar!
+        </button>
+      </div>
+    </section>
+
+    <!-- PANTALLA DEL JUEGO -->
+    <section id="game" class="screen game-screen hidden">
+
+      <header class="top-bar">
+        <div class="star-counter">
+          <span class="star-symbol">★</span>
+          <span id="stars">0</span>
+        </div>
+
+        <button id="homeBtn" class="home-btn">Inicio</button>
+      </header>
+
+      <!-- PROGRESO -->
+      <div class="progress-container">
+        <div class="progress-info">
+          <span id="levelLabel">Misión 1 de 5</span>
+          <span id="progressText">20%</span>
+        </div>
+
+        <div class="progress-track">
+          <div id="progressBar" class="progress-fill"></div>
+        </div>
+      </div>
+
+      <div class="mission-card">
+
+        <div class="mission-heading">
+          <h2 id="levelTitle">Aprendemos a saludar</h2>
+        </div>
+
+        <!-- IMAGEN PRINCIPAL DE LA MISIÓN -->
+        <div class="scene-images">
+          <img
+            id="missionImage"
+            src="imagenes/mision-1-saludar.png"
+            alt="Niños saludándose"
+          >
+        </div>
+
+        <!-- SITUACIÓN Y BOCINA SEPARADAS -->
+        <div class="section-title">
+          <h3>Observa la situación</h3>
+        </div>
+
+        <div class="audio-layout">
+          <button id="sceneSoundBtn" class="speaker-box" aria-label="Escuchar situación">
+            <span class="speaker-icon">🔊</span>
+            <span>Escuchar</span>
+          </button>
+
+          <div id="sceneText" class="text-box">
+            Llegas al salón y encuentras a tu compañero.
+          </div>
+        </div>
+
+        <!-- PREGUNTA Y BOCINA SEPARADAS -->
+        <div class="question-area">
+          <h3>Ahora responde</h3>
+
+          <div class="audio-layout question-layout">
+            <button id="questionSoundBtn" class="speaker-box" aria-label="Escuchar pregunta">
+              <span class="speaker-icon">🔊</span>
+              <span>Escuchar</span>
+            </button>
+
+            <div id="questionText" class="text-box question-text">
+              ¿Qué puedes decirle para comenzar una conversación?
+            </div>
+          </div>
+        </div>
+
+        <!-- RESPUESTAS -->
+        <div class="answers-heading">
+          <h3>Elige la respuesta correcta</h3>
+        </div>
+
+        <div id="answers" class="answers"></div>
+
+        <!-- MENSAJE -->
+        <div id="feedback" class="feedback hidden"></div>
+
+        <button id="nextBtn" class="primary-btn hidden">
+          Continuar
+        </button>
+
+        <button id="soundBtn" class="audio-btn">
+          Escuchar nuevamente
+        </button>
+
+      </div>
+    </section>
+
+    <!-- PANTALLA FINAL -->
+    <section id="finish" class="screen finish-screen hidden">
+
+      <div class="certificate">
+        <div class="certificate-decoration">★ ★ ★</div>
+
+        <h1>¡Felicidades!</h1>
+        <h2>Diploma de pequeño conversador</h2>
+
+        <p>Este diploma se entrega a:</p>
+
+        <h2 id="certificateName">Pequeño conversador</h2>
+
+        <p id="finishMessage">
+          ¡Terminaste todas las misiones!
+        </p>
+
+        <div class="final-stars">
+          ★ <span id="finalStars">0</span> estrellas
+        </div>
+
+        <p>
+          Por aprender a conversar, escuchar y respetar a los demás.
+        </p>
+
+        <p class="certificate-footer">
+          ¡Sigue aprendiendo y compartiendo!
+        </p>
+      </div>
+
+      <button id="printBtn" class="primary-btn">
+        Imprimir diploma
+      </button>
+
+      <button id="replayBtn" class="secondary-btn">
+        Volver a jugar
+      </button>
+
+    </section>
+
+  </main>
+
+  <!-- MÚSICA DE FONDO -->
+  <audio
+    id="backgroundMusic"
+    src="La canción de las preguntas.mp3"
+    loop
+    preload="auto">
+  </audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
