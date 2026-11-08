@@ -74,6 +74,7 @@ const levels = [
 
 let currentLevel = 0;
 let totalStars = 0;
+let completedMissions = 0;
 let player = "Pequeño conversador";
 let answered = false;
 
@@ -112,6 +113,15 @@ const replayBtn = document.getElementById("replayBtn");
 
 const backgroundMusic = document.getElementById("backgroundMusic");
 backgroundMusic.volume = 0.15;
+
+// ACTUALIZAR PROGRESO
+// SOLO CUENTA LAS MISIONES RESPONDIDAS CORRECTAMENTE
+function updateProgress() {
+  const progress = (completedMissions / levels.length) * 100;
+
+  progressText.textContent = Math.round(progress) + "%";
+  progressBar.style.width = progress + "%";
+}
 
 // VOZ MANUAL
 function speak(text) {
@@ -159,6 +169,7 @@ function startGame() {
 
   currentLevel = 0;
   totalStars = 0;
+  completedMissions = 0;
 
   startMusic();
 
@@ -166,6 +177,7 @@ function startGame() {
   finish.classList.add("hidden");
   game.classList.remove("hidden");
 
+  updateProgress();
   renderLevel();
 
   speak(
@@ -195,10 +207,9 @@ function renderLevel() {
   levelLabel.textContent =
     `Misión ${currentLevel + 1} de ${levels.length}`;
 
-  const progress = ((currentLevel + 1) / levels.length) * 100;
-
-  progressText.textContent = Math.round(progress) + "%";
-  progressBar.style.width = progress + "%";
+  // EL PORCENTAJE YA NO DEPENDE DE LA MISIÓN ACTUAL
+  // SOLO DEPENDE DE LAS RESPUESTAS CORRECTAS
+  updateProgress();
 
   stars.textContent = totalStars;
 
@@ -258,7 +269,13 @@ function checkAnswer(index, selectedButton) {
     answered = true;
     totalStars++;
 
+    // SUMAR UNA MISIÓN SOLO CUANDO LA RESPUESTA ES CORRECTA
+    completedMissions++;
+
     stars.textContent = totalStars;
+
+    // ACTUALIZAR EL PORCENTAJE DESPUÉS DE ACERTAR
+    updateProgress();
 
     selectedButton.classList.add("correct");
 
@@ -295,6 +312,7 @@ function checkAnswer(index, selectedButton) {
 
     speak("¡Inténtalo otra vez! Tú puedes.");
 
+    // NO SUMAR ESTRELLAS NI PORCENTAJE SI SE EQUIVOCA
     setTimeout(() => {
       selectedButton.classList.remove("incorrect");
     }, 1000);
@@ -320,6 +338,9 @@ soundBtn.addEventListener("click", () => {
 
 // SIGUIENTE MISIÓN
 nextBtn.addEventListener("click", () => {
+  // EVITAR AVANZAR SIN RESPONDER CORRECTAMENTE
+  if (!answered) return;
+
   if (currentLevel < levels.length - 1) {
 
     currentLevel++;
@@ -358,6 +379,15 @@ homeBtn.addEventListener("click", () => {
   game.classList.add("hidden");
   finish.classList.add("hidden");
   welcome.classList.remove("hidden");
+
+  // REINICIAR LOS CONTADORES
+  currentLevel = 0;
+  totalStars = 0;
+  completedMissions = 0;
+  answered = false;
+
+  stars.textContent = totalStars;
+  updateProgress();
 });
 
 // IMPRIMIR DIPLOMA
@@ -369,9 +399,13 @@ printBtn.addEventListener("click", () => {
 replayBtn.addEventListener("click", () => {
   currentLevel = 0;
   totalStars = 0;
+  completedMissions = 0;
 
   finish.classList.add("hidden");
   game.classList.remove("hidden");
+
+  stars.textContent = totalStars;
+  updateProgress();
 
   renderLevel();
 
@@ -387,3 +421,6 @@ if ("speechSynthesis" in window) {
 
 // BOTÓN DE INICIO
 startBtn.addEventListener("click", startGame);
+
+// PROGRESO INICIAL
+updateProgress();
